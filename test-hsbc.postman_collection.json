@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "61e437e5-ec36-4249-ae53-4b25379af98b",
+		"name": "test-hsbc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29177182"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/rbooking",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"customerName\": \"Alice Smith\",\r\n  \"tableSize\": 12,\r\n  \"date\": \"2025-05-16\",\r\n  \"time\": \"19:30\",\r\n  \"durationMinutes\": 90\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/rbooking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rbooking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/rbooking",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/rbooking?date=2025-05-16",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rbooking"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2025-05-16"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
