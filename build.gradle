@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id "com.diffplug.spotless" version "7.0.2"
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+dependencies {
+    implementation 'io.muserver:mu-server:2.1.8'
+    implementation 'jakarta.ws.rs:jakarta.ws.rs-api:4.0.0'
+    implementation 'org.slf4j:slf4j-simple:2.0.17'
+    implementation 'jakarta.validation:jakarta.validation-api:3.1.1'
+    implementation 'com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-json-provider:2.19.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.19.0'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.0'
+    compileOnly 'org.projectlombok:lombok:1.18.38'
+    annotationProcessor 'org.projectlombok:lombok:1.18.38'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+spotless {
+    java {
+        target 'src/**/*.java'
+        googleJavaFormat('1.17.0')
+        removeUnusedImports()
+        importOrder(
+                'java',
+                'javax',
+                'org',
+                'com',
+                '',
+                '\\#'
+        )
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}
