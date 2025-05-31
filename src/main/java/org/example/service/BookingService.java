@@ -64,9 +64,11 @@ public class BookingService {
     booking.setStatus(enoughCapacity ? BookingStatus.CONFIRMED : BookingStatus.PENDING);
 
     try {
-      Booking savedBooking = repository.save(booking);
-      log.info("Booking saved successfully with status: {}", savedBooking.getStatus());
-      return BookingMapper.toResponse(savedBooking);
+      Booking savedBooking = null;
+      if (booking.getStatus() != BookingStatus.PENDING) savedBooking = repository.save(booking);
+      log.info("Booking saved successfully with status: {}", booking.getStatus());
+
+      return BookingMapper.toResponse(booking);
     } catch (Exception e) {
       log.error("Unexpected error occurred while saving booking: {}", e.getMessage(), e);
       throw new InvalidBookingRequestException(ErrorMessages.INTERNAL_SERVER_ERROR);

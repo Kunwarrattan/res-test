@@ -25,11 +25,12 @@ public class BookingController {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   public Response createBooking(@Valid BookingRequest booking) {
+    ApiResponse<BookingResponse> apiResponse;
     BookingResponse response = bookingService.save(booking);
-
-    ApiResponse<BookingResponse> apiResponse =
-        ApiResponse.<BookingResponse>builder().data(response).notification(null).build();
-
+    if (response.getStatus() == "CONFIRMED")
+      apiResponse =
+          ApiResponse.<BookingResponse>builder().data(response).notification(null).build();
+    else apiResponse = ApiResponse.<BookingResponse>builder().data(null).notification(null).build();
     return Response.status(Response.Status.CREATED).entity(apiResponse).build();
   }
 
